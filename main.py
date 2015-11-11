@@ -20,11 +20,9 @@ def fix_times(path, branch = "master"):
     # create Repo object using path
     repo = gp.Repo(path)
 
-    # grab last commit
-    last_commit = repo.heads[branch].commit
+    # make changes to a commit list
+    [ _modify_one_commit(c) for c in repo.iter_commits(branch) ]
 
-    # make changes
-    repo.heads[branch].commit = _modify_one_commit(last_commit)
 
 def main():
     parser = argparse.ArgumentParser("Modify git commit timestamps")
